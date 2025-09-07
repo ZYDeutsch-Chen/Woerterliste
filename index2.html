@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>牧笛和牧歌的德语单词卡片 - A2备考S39- </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px 0;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        /* 快速导航 */
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0 20px;
+            padding: 0 5px;
+        }
+        
+        .nav-btn {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 0.85rem;
+            flex: 1;
+            min-width: 100px;
+            max-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .nav-btn i {
+            font-size: 0.9em;
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            transform: scale(1.05);
+        }
+        
+        /* 卡片容器 */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+            padding-bottom: 30px;
+        }
+        
+        .card {
+            height: 320px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 16px;
+        }
+        
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .card-front {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .card-back {
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        .verb-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .verb-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .speak-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .speak-btn:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        .verb-forms {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .form-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #7f8c8d;
+            min-width: 80px;
+        }
+        
+        .form-value {
+            font-weight: 500;
+            color: #2c3e50;
+            text-align: right;
+            flex: 1;
+        }
+        
+        .verb-example {
+            background: rgba(236, 240, 241, 0.6);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #34495e;
+            border-left: 4px solid #3498db;
+        }
+        
+        /* 卡片背面样式 */
+        .valence {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .meaning {
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+            font-weight: 600;
+        }
+        
+        .example-translation {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border-left: 4px solid #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .card-hint {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            font-style: italic;
+        }
+        
+        /* 类别标题 */
+        .category-title {
+            text-align: center;
+            padding: 15px 0;
+            margin: 20px 0 10px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.9), rgba(44, 62, 80, 0.95));
+            color: white;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* 标注样式 */
+        .akk-bg {
+            background-color: #27ae60;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .dat-bg {
+            background-color: #2980b9;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .reflexive-bg {
+            background-color: #f39c12;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        /* 名词性别样式 */
+        .noun-masc {
+            background-color: #3498db; /* 阳性蓝色 */
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .noun-neut {
+            background-color: #27ae60; /* 中性绿色 */
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .noun-fem {
+            background-color: #e84393; /* 阴性粉色 */
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        /* 隐藏其他词类的过去分词标签 */
+        .others .pii-label {
+            display: none;
+        }
+        
+        .others .pii-value {
+            display: none;
+        }
+        
+        /* 底部信息 */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        /* 加载状态 */
+        .loader {
+            text-align: center;
+            padding: 30px;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>牧笛和牧歌的德语单词卡片</h1>
+        <p> - A2备考S39- | 点击<i class="fas fa-volume-up"></i>发音</p>
+    </div>
+    
+    <!-- 快速导航 -->
+    <div class="quick-nav">
+        <button class="nav-btn active" data-category="all"><i class="fas fa-star"></i> 全部词汇</button>
+        <button class="nav-btn" data-category="verbs"><i class="fas fa-walking"></i> 动词</button>
+        <button class="nav-btn" data-category="nouns"><i class="fas fa-bullseye"></i> 名词</button>
+        <button class="nav-btn" data-category="others"><i class="fas fa-retweet"></i> 其他</button>
+    </div>
+    
+    <!-- 卡片容器 -->
+    <div class="cards-container" id="cards-container">
+        <div class="loader">
+            <i class="fas fa-spinner fa-spin"></i> 正在加载词汇卡片...
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>德语词汇学习卡片 | 至元德语内部资料</p>
+        <p>总计: <span id="total-count">0</span>个词汇 | 标注：三格(<span class="dat-bg">Dat</span>) 四格(<span class="akk-bg">Akk</span>)</p>
+    </div>
+    
+    <script>
+        // 词汇数据
+
+ const vocabulary = [
+            // 动词类
+            {
+                infinitive: "nutzen", 
+                pres3: "nutzt", 
+                pii: "genutzt", 
+                example: "Wir nutzen das Internet.", 
+                exampleTranslation: "我们利用互联网。",
+                meaning: "利用", 
+                valence: "jd. nutzt <span class=\"akk-bg\">Akk</span>", 
+                category: "verbs"
+            },
+            {
+                infinitive: "wissen", 
+                pres3: "weiß", 
+                pii: "gewusst", 
+                example: "Ich weiß die Antwort.", 
+                exampleTranslation: "我知道答案。",
+                meaning: "知道", 
+                valence: "jd. weiß <span class=\"akk-bg\">Akk</span>", 
+                category: "verbs"
+            },
+            {
+                infinitive: "denken", 
+                pres3: "denkt", 
+                pii: "gedacht", 
+                example: "Ich denke an meine Zukunft.", 
+                exampleTranslation: "我在思考我的未来。",
+                meaning: "想，思考", 
+                valence: "jd. denkt an <span class=\"akk-bg\">Akk</span>", 
+                category: "verbs"
+            },
+            {
+                infinitive: "nennen", 
+                pres3: "nennt", 
+                pii: "genannt", 
+                example: "Kannst du ein Beispiel nennen?", 
+                exampleTranslation: "你能说出一个例子吗？",
+                meaning: "称呼，说出名字", 
+                valence: "jd. nennt <span class=\"akk-bg\">Akk</span>", 
+                category: "verbs"
+            },
+            {
+                infinitive: "aufhören", 
+                pres3: "hört auf", 
+                pii: "aufgehört", 
+                example: "Er hört mit dem Rauchen auf.", 
+                exampleTranslation: "他停止抽烟了。",
+                meaning: "停止", 
+                valence: "jd. hört mit <span class=\"dat-bg\">Dat</span> auf", 
+                category: "verbs"
+            },
+            {
+                infinitive: "erklären", 
+                pres3: "erklärt", 
+                pii: "erklärt", 
+                example: "Sie erklärt mir die Regel.", 
+                exampleTranslation: "她向我解释这个规则。",
+                meaning: "解释", 
+                valence: "jd. erklärt <span class=\"dat-bg\">Dat</span><span class=\"akk-bg\">Akk</span>", 
+                category: "verbs"
+            },
+            {
+                infinitive: "aufpassen", 
+                pres3: "passt auf", 
+                pii: "aufgepasst", 
+                example: "Passen Sie bitte auf die Kinder auf!", 
+                exampleTranslation: "您请照看好孩子们！",
+                meaning: "注意，照看", 
+                valence: "jd. passt auf <span class=\"akk-bg\">Akk</span> auf", 
+                category: "verbs"
+            },
+            {
+                infinitive: "informieren sich", 
+                pres3: "informiert sich", 
+                pii: "informiert", 
+                example: "Ich informiere mich über das Thema.", 
+                exampleTranslation: "我了解这个主题的信息。",
+                meaning: "了解信息", 
+                valence: "jd. informiert <span class=\"akk-bg\">sich</span> über <span class=\"akk-bg\">Akk</span>", 
+                category: "verbs"
+            },
+            
+            // 名词类
+            {
+                noun: "Stress", 
+                gender: "der",
+                plural: "Stresses",
+                example: "Ich habe viel Stress.", 
+                exampleTranslation: "我有很大的压力。",
+                meaning: "压力", 
+                valence: "<span class=\"noun-masc\">m</span>",
+                category: "nouns"
+            },
+            {
+                noun: "Medizin", 
+                gender: "die",
+                plural: "Medizinen",
+                example: "Die Medizin hilft gegen Fieber.", 
+                exampleTranslation: "这种药有助于发烧。",
+                meaning: "药物，医学", 
+                valence: "<span class=\"noun-fem\">f</span>",
+                category: "nouns"
+            },
+            {
+                noun: "Arzt", 
+                gender: "der",
+                plural: "Ärzte",
+                example: "Der Arzt arbeitet im Krankenhaus.", 
+                exampleTranslation: "医生在医院工作。",
+                meaning: "医生", 
+                valence: "<span class=\"noun-masc\">m</span>",
+                category: "nouns"
+            },
+            {
+                noun: "Kindergarten", 
+                gender: "der",
+                plural: "Kindergärten",
+                example: "Der Kindergarten schließt um 16 Uhr.", 
+                exampleTranslation: "幼儿园4点关门。",
+                meaning: "幼儿园", 
+                valence: "<span class=\"noun-masc\">m</span>",
+                category: "nouns"
+            },
+            {
+                noun: "Operation", 
+                gender: "die",
+                plural: "Operationen",
+                example: "Die Operation dauert zwei Stunden.", 
+                exampleTranslation: "手术持续两个小时。",
+                meaning: "手术", 
+                valence: "<span class=\"noun-fem\">f</span>",
+                category: "nouns"
+            },
+            
+            // 其他词类
+            {
+                word: "nützlich", 
+                wordType: "形容词",
+                example: "Diese Information ist nützlich.", 
+                exampleTranslation: "这个信息很有用。",
+                meaning: "有用的", 
+                valence: "",
+                category: "others"
+            },
+            {
+                word: "schädlich", 
+                wordType: "形容词",
+                example: "Rauchen ist schädlich.", 
+                exampleTranslation: "吸烟有害。",
+                meaning: "有害的", 
+                valence: "",
+                category: "others"
+            },
+            {
+                word: "gefährlich", 
+                wordType: "形容词",
+                example: "Autofahren ist gefährlich.", 
+                exampleTranslation: "开车挺危险的。",
+                meaning: "危险的", 
+                valence: "",
+                category: "others"
+            },
+            {
+                word: " möglich", 
+                wordType: "形容词",
+                example: "Es ist möglich.", 
+                exampleTranslation: "这是可能的。",
+                meaning: "可能的", 
+                valence: "",
+                category: "others"
+            },
+            {
+                word: "kompliziert", 
+                wordType: "形容词",
+                example: "Die Aufgabe ist kompliziert.", 
+                exampleTranslation: "这个任务很复杂。",
+                meaning: "复杂的", 
+                valence: "",
+                category: "others"
+            },
+            {
+                word: "gesund", 
+                wordType: "形容词",
+                example: "Sport ist gesund.", 
+                exampleTranslation: "运动是健康的。",
+                meaning: "健康的", 
+                valence: "",
+                category: "others"
+            },
+            {
+                word: "wichtig", 
+                wordType: "形容词",
+                example: "Übungen sind sehr wichtig.", 
+                exampleTranslation: "练习非常重要。",
+                meaning: "重要的", 
+                valence: "",
+                category: "others"
+            },
+            {
+                word: "außerdem", 
+                wordType: "副词",
+                example: "Außerdem ist er auch sehr freundlich.", 
+                exampleTranslation: "此外，他也很友好。",
+                meaning: "此外", 
+                valence: "",
+                category: "others"
+            },
+            {
+                word: "früher", 
+                wordType: "副词",
+                example: "Früher war ich Student.", 
+                exampleTranslation: "我以前是大学生。",
+                meaning: "以前", 
+                valence: "",
+                category: "others"
+            },
+            {
+                word: "andere", 
+                wordType: "代词",
+                example: "Er hat andere Pläne.", 
+                exampleTranslation: "他有其他的计划。",
+                meaning: "其他的", 
+                valence: "",
+                category: "others"
+            }
+        ];
+
+        // 渲染词汇卡片
+        function renderVocabularyCards(category = 'all') {
+            const container = document.getElementById('cards-container');
+            container.innerHTML = '';
+            
+            // 根据类别过滤词汇
+            const filteredVocabulary = category === 'all' 
+                ? vocabulary 
+                : vocabulary.filter(item => item.category === category);
+            
+            // 更新总数
+            document.getElementById('total-count').textContent = vocabulary.length;
+            
+            if (filteredVocabulary.length === 0) {
+                container.innerHTML = `
+                    <div class="loader">
+                        <i class="fas fa-info-circle"></i> 该类别下没有词汇
+                    </div>
+                `;
+                return;
+            }
+            
+            // 添加类别标题
+            const categoryTitle = document.createElement('div');
+            categoryTitle.className = 'category-title';
+            categoryTitle.textContent = getCategoryName(category);
+            container.appendChild(categoryTitle);
+            
+            // 渲染每个词汇卡片
+            filteredVocabulary.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.word = item.category === 'verbs' ? item.infinitive : 
+                                   item.category === 'nouns' ? item.noun : item.word;
+                
+                if (item.category === 'verbs') {
+                    // 动词卡片
+                    card.innerHTML = `
+                        <div class="card-inner">
+                            <!-- 卡片正面 -->
+                            <div class="card-face card-front">
+                                <div class="verb-header">
+                                    <div class="verb-name">${item.infinitive}</div>
+                                    <button class="speak-btn" onclick="speakWordAndExample('${item.infinitive}', '${item.example}', event)">
+                                        <i class="fas fa-volume-up"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="verb-forms">
+                                    <div class="form-item">
+                                        <div class="form-label">单三形式:</div>
+                                        <div class="form-value">${item.pres3}</div>
+                                    </div>
+                                    <div class="form-item">
+                                        <div class="form-label">过去分词:</div>
+                                        <div class="form-value">${item.pii}</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="verb-example">
+                                    ${item.example}
+                                </div>
+                            </div>
+                            
+                            <!-- 卡片背面 -->
+                            <div class="card-face card-back">
+                                <div class="valence">${item.valence}</div>
+                                <div class="meaning">${item.meaning}</div>
+                                <div class="example-translation">
+                                    ${item.exampleTranslation}
+                                </div>
+                                <div class="card-hint">点击卡片返回</div>
+                            </div>
+                        </div>
+                    `;
+                } else if (item.category === 'nouns') {
+                    // 名词卡片
+                    card.innerHTML = `
+                        <div class="card-inner">
+                            <!-- 卡片正面 -->
+                            <div class="card-face card-front">
+                                <div class="verb-header">
+                                    <div class="verb-name">${item.noun}</div>
+                                    <button class="speak-btn" onclick="speakWordAndExample('${item.noun}', '${item.example}', event)">
+                                        <i class="fas fa-volume-up"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="verb-forms">
+                                    <div class="form-item">
+                                        <div class="form-label">词性:</div>
+                                        <div class="form-value">${item.gender}</div>
+                                    </div>
+                                    <div class="form-item">
+                                        <div class="form-label">复数:</div>
+                                        <div class="form-value">${item.plural}</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="verb-example">
+                                    ${item.example}
+                                </div>
+                            </div>
+                            
+                            <!-- 卡片背面 -->
+                            <div class="card-face card-back">
+                                <div class="valence">名词 ${item.valence}</div>
+                                <div class="meaning">${item.meaning}</div>
+                                <div class="example-translation">
+                                    ${item.exampleTranslation}
+                                </div>
+                                <div class="card-hint">点击卡片返回</div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // 其他词类卡片
+                    card.className += ' others'; // 添加others类以隐藏过去分词
+                    card.innerHTML = `
+                        <div class="card-inner">
+                            <!-- 卡片正面 -->
+                            <div class="card-face card-front">
+                                <div class="verb-header">
+                                    <div class="verb-name">${item.word}</div>
+                                    <button class="speak-btn" onclick="speakWordAndExample('${item.word}', '${item.example}', event)">
+                                        <i class="fas fa-volume-up"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="verb-forms">
+                                    <div class="form-item">
+                                        <div class="form-label">词类:</div>
+                                        <div class="form-value">${item.wordType}</div>
+                                    </div>
+                                    <div class="form-item">
+                                        <div class="form-label pii-label">过去分词:</div>
+                                        <div class="form-value pii-value"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="verb-example">
+                                    ${item.example}
+                                </div>
+                            </div>
+                            
+                            <!-- 卡片背面 -->
+                            <div class="card-face card-back">
+                                <div class="valence">${item.wordType}</div>
+                                <div class="meaning">${item.meaning}</div>
+                                <div class="example-translation">
+                                    ${item.exampleTranslation}
+                                </div>
+                                <div class="card-hint">点击卡片返回</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // 添加点击事件
+                card.addEventListener('click', function(e) {
+                    // 如果点击的是发音按钮，不翻转卡片
+                    if (e.target.closest('.speak-btn')) {
+                        e.stopPropagation();
+                        return;
+                    }
+                    
+                    this.classList.toggle('flipped');
+                    
+                    // 点击卡片时自动朗读
+                    if (!this.classList.contains('flipped')) {
+                        return; // 如果是翻回正面，不朗读
+                    }
+                    
+                    // 获取当前卡片的单词和释义
+                    let word, meaning;
+                    if (item.category === 'verbs') {
+                        word = item.infinitive;
+                        meaning = item.meaning;
+                    } else if (item.category === 'nouns') {
+                        word = item.noun;
+                        meaning = item.meaning;
+                    } else {
+                        word = item.word;
+                        meaning = item.meaning;
+                    }
+                    
+                    // 自动朗读单词和中文释义
+                    speakWordAndMeaning(word, meaning);
+                });
+                
+                container.appendChild(card);
+            });
+        }
+        
+        // 获取类别名称
+        function getCategoryName(category) {
+            const names = {
+                'all': '全部词汇',
+                'verbs': '动词',
+                'nouns': '名词',
+                'others': '其他词类'
+            };
+            return names[category] || '词汇';
+        }
+        
+        // 发音功能 - 朗读单词和例句
+        function speakWordAndExample(word, example, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            if ('speechSynthesis' in window) {
+                // 停止当前正在播放的语音
+                window.speechSynthesis.cancel();
+                
+                // 创建单词朗读
+                const wordUtterance = new SpeechSynthesisUtterance(word);
+                wordUtterance.lang = 'de-DE';
+                wordUtterance.rate = 0.9;
+                wordUtterance.pitch = 1;
+                
+                // 单词朗读完成后朗读例句
+                wordUtterance.onend = function() {
+                    setTimeout(() => {
+                        const exampleUtterance = new SpeechSynthesisUtterance(example);
+                        exampleUtterance.lang = 'de-DE';
+                        exampleUtterance.rate = 0.9;
+                        exampleUtterance.pitch = 1;
+                        window.speechSynthesis.speak(exampleUtterance);
+                    }, 300); // 短暂间隔
+                };
+                
+                // 播放单词朗读
+                window.speechSynthesis.speak(wordUtterance);
+                
+                // 添加动画效果
+                if (event) {
+                    const button = event.target.closest('.speak-btn');
+                    if (button) {
+                        button.innerHTML = '<i class="fas fa-volume-up fa-beat"></i>';
+                        setTimeout(() => {
+                            button.innerHTML = '<i class="fas fa-volume-up"></i>';
+                        }, 1000);
+                    }
+                }
+            } else {
+                alert('抱歉，您的浏览器不支持语音合成功能。');
+            }
+        }
+        
+        // 发音功能 - 朗读单词和中文释义（用于点击卡片时自动朗读）
+        function speakWordAndMeaning(word, meaning) {
+            if ('speechSynthesis' in window) {
+                // 停止当前正在播放的语音
+                window.speechSynthesis.cancel();
+                
+                // 创建单词朗读
+                const wordUtterance = new SpeechSynthesisUtterance(word);
+                wordUtterance.lang = 'de-DE';
+                wordUtterance.rate = 0.9;
+                wordUtterance.pitch = 1;
+                
+                // 单词朗读完成后朗读中文释义
+                wordUtterance.onend = function() {
+                    setTimeout(() => {
+                        const meaningUtterance = new SpeechSynthesisUtterance(meaning);
+                        meaningUtterance.lang = 'zh-CN';
+                        meaningUtterance.rate = 1;
+                        meaningUtterance.pitch = 1;
+                        window.speechSynthesis.speak(meaningUtterance);
+                    }, 300); // 短暂间隔
+                };
+                
+                // 播放单词朗读
+                window.speechSynthesis.speak(wordUtterance);
+            }
+        }
+        
+        // 类别导航按钮事件
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // 移除所有active类
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // 为当前按钮添加active类
+                this.classList.add('active');
+                
+                // 渲染对应类别的卡片
+                const category = this.dataset.category;
+                renderVocabularyCards(category);
+            });
+        });
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            renderVocabularyCards('all');
+        });
+    </script>
+</body>
+</html>
